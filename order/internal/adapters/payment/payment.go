@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/andrei-kozel/microservices-demo-proto/golang/payment"
-	"github.com/andrei-kozel/microservices-demo/internal/application/core/domain"
+	"github.com/andrei-kozel/microservices-demo/order/internal/application/core/domain"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )

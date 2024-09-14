@@ -6,8 +6,8 @@ import (
 	"net"
 
 	"github.com/andrei-kozel/microservices-demo-proto/golang/order"
-	"github.com/andrei-kozel/microservices-demo/config"
-	"github.com/andrei-kozel/microservices-demo/internal/ports"
+	"github.com/andrei-kozel/microservices-demo/order/config"
+	"github.com/andrei-kozel/microservices-demo/order/internal/ports"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )

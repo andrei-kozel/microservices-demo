@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/andrei-kozel/microservices-demo/internal/application/core/domain"
-	"github.com/andrei-kozel/microservices-demo/internal/ports"
+	"github.com/andrei-kozel/microservices-demo/order/internal/application/core/domain"
+	"github.com/andrei-kozel/microservices-demo/order/internal/ports"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

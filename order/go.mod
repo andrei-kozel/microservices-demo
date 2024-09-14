@@ -1,4 +1,4 @@
-module github.com/andrei-kozel/microservices-demo
+module github.com/andrei-kozel/microservices-demo/order
 
 go 1.23.1
 

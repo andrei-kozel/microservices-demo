@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/andrei-kozel/microservices-demo-proto/golang/order"
-	"github.com/andrei-kozel/microservices-demo/internal/application/core/domain"
+	"github.com/andrei-kozel/microservices-demo/order/internal/application/core/domain"
 )
 
 func (a Adapter) Create(ctx context.Context, request *order.CreateOrderRequest) (*order.CreateOrderResponse, error) {

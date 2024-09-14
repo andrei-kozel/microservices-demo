@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 
-	"github.com/andrei-kozel/microservices-demo/config"
-	"github.com/andrei-kozel/microservices-demo/internal/adapters/db"
-	"github.com/andrei-kozel/microservices-demo/internal/adapters/grpc"
-	"github.com/andrei-kozel/microservices-demo/internal/adapters/payment"
-	"github.com/andrei-kozel/microservices-demo/internal/application/core/api"
+	"github.com/andrei-kozel/microservices-demo/order/config"
+	"github.com/andrei-kozel/microservices-demo/order/internal/adapters/db"
+	"github.com/andrei-kozel/microservices-demo/order/internal/adapters/grpc"
+	"github.com/andrei-kozel/microservices-demo/order/internal/adapters/payment"
+	"github.com/andrei-kozel/microservices-demo/order/internal/application/core/api"
 )
 
 func main() {
