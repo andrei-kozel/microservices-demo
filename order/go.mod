@@ -10,6 +10,8 @@ require (
 
 require github.com/andrei-kozel/microservices-demo-proto/golang/payment v1.0.12
 
+require github.com/joho/godotenv v1.5.1 // indirect
+
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect

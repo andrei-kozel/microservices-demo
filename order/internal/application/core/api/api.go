@@ -42,3 +42,12 @@ func (a Application) PlaceOrder(order domain.Order) (domain.Order, error) {
 
 	return order, nil
 }
+
+func (a Application) GetOrder(orderId int64) (domain.Order, error) {
+	order, err := a.db.Get(orderId)
+	if err != nil {
+		return domain.Order{}, err
+	}
+
+	return order, nil
+}

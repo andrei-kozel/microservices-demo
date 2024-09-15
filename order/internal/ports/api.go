@@ -4,4 +4,5 @@ import "github.com/andrei-kozel/microservices-demo/order/internal/application/co
 
 type APIPort interface {
 	PlaceOrder(order domain.Order) (domain.Order, error)
+	GetOrder(orderID int64) (domain.Order, error)
 }

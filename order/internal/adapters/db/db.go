@@ -43,16 +43,19 @@ func NewAdapter(dataSourceUrl string) (*Adapter, error) {
 	}, nil
 }
 
-func (a *Adapter) Get(id string) (domain.Order, error) {
+func (a *Adapter) Get(id int64) (domain.Order, error) {
 	var orderEntity Order
-	res := a.db.First(&orderEntity, id)
+	res := a.db.Preload("OrderItems").First(&orderEntity, uint(id))
 	var orderItems []domain.OrderItem
-	for _, item := range orderEntity.OrderItems {
-		orderItems = append(orderItems, domain.OrderItem{
-			ProductCode: item.ProductCode,
-			UnitPrice:   item.UnitPrice,
-			Quantity:    item.Quantity,
-		})
+
+	if orderEntity.OrderItems != nil {
+		for _, item := range orderEntity.OrderItems {
+			orderItems = append(orderItems, domain.OrderItem{
+				ProductCode: item.ProductCode,
+				UnitPrice:   item.UnitPrice,
+				Quantity:    item.Quantity,
+			})
+		}
 	}
 
 	order := domain.Order{

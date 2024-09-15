@@ -4,6 +4,8 @@ import (
 	"log"
 	"os"
 	"strconv"
+
+	"github.com/joho/godotenv"
 )
 
 func GetEnv() string {
@@ -28,6 +30,11 @@ func GetApplicationPort() int {
 }
 
 func getEnvironmentValue(key string) string {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("error loading .env file")
+	}
+
 	if os.Getenv(key) == "" {
 		log.Fatalf("%s environment variable is missing.", key)
 	}
