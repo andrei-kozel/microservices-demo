@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/andrei-kozel/microservices-demo/order/internal/application/core/domain"
 	"github.com/andrei-kozel/microservices-demo/order/internal/ports"
+	"golang.org/x/net/context"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -20,13 +21,13 @@ func NewApplication(db ports.DBPort, payment ports.PaymentPort) *Application {
 	}
 }
 
-func (a Application) PlaceOrder(order domain.Order) (domain.Order, error) {
-	err := a.db.Save(&order)
+func (a Application) PlaceOrder(ctx context.Context, order domain.Order) (domain.Order, error) {
+	err := a.db.Save(ctx, &order)
 	if err != nil {
 		return domain.Order{}, err
 	}
 
-	paymentErr := a.payment.Charge(&order)
+	paymentErr := a.payment.Charge(ctx, &order)
 	if paymentErr != nil {
 		st, _ := status.FromError(paymentErr)
 		fieldErr := &errdetails.BadRequest_FieldViolation{
@@ -43,8 +44,8 @@ func (a Application) PlaceOrder(order domain.Order) (domain.Order, error) {
 	return order, nil
 }
 
-func (a Application) GetOrder(orderId int64) (domain.Order, error) {
-	order, err := a.db.Get(orderId)
+func (a Application) GetOrder(ctx context.Context, orderId int64) (domain.Order, error) {
+	order, err := a.db.Get(ctx, orderId)
 	if err != nil {
 		return domain.Order{}, err
 	}

@@ -1,6 +1,7 @@
 package db
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/andrei-kozel/microservices-demo/order/internal/application/core/domain"
@@ -43,7 +44,7 @@ func NewAdapter(dataSourceUrl string) (*Adapter, error) {
 	}, nil
 }
 
-func (a *Adapter) Get(id int64) (domain.Order, error) {
+func (a *Adapter) Get(ctx context.Context, id int64) (domain.Order, error) {
 	var orderEntity Order
 	res := a.db.Preload("OrderItems").First(&orderEntity, uint(id))
 	var orderItems []domain.OrderItem
@@ -69,7 +70,7 @@ func (a *Adapter) Get(id int64) (domain.Order, error) {
 	return order, res.Error
 }
 
-func (a *Adapter) Save(order *domain.Order) error {
+func (a *Adapter) Save(ctx context.Context, order *domain.Order) error {
 	var orderItems []OrderItem
 
 	for _, item := range order.OrderItems {

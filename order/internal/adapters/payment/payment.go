@@ -15,7 +15,10 @@ type Adapter struct {
 
 func NewAdapter(paymentServiceUrl string) (*Adapter, error) {
 	var opts []grpc.DialOption
-	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	opts = append(
+		opts,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
 	conn, err := grpc.NewClient(
 		paymentServiceUrl,
 		opts...,
@@ -24,20 +27,20 @@ func NewAdapter(paymentServiceUrl string) (*Adapter, error) {
 		return nil, err
 	}
 
-	defer conn.Close()
 	client := payment.NewPaymentClient(conn)
 
 	return &Adapter{payment: client}, nil
 }
 
-func (a *Adapter) Charge(order *domain.Order) error {
+func (a *Adapter) Charge(ctx context.Context, order *domain.Order) error {
 	_, err := a.payment.Create(
-		context.Background(),
+		ctx,
 		&payment.CreatePaymentRequest{
 			UserId:     order.CustomerID,
 			OrderId:    order.ID,
 			TotalPrice: order.TotalPrice(),
 		},
 	)
+
 	return err
 }

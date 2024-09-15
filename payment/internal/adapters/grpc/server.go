@@ -13,10 +13,10 @@ import (
 )
 
 type Adapter struct {
-	api    ports.APIPort
-	port   int
-	server *grpc.Server
 	payment.UnimplementedPaymentServer
+	api    ports.APIPort
+	server *grpc.Server
+	port   int
 }
 
 func NewAdapter(api ports.APIPort, port int) *Adapter {
